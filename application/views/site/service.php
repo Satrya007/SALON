@@ -28,7 +28,36 @@
 					
 						
 					
-						   																									
+						   <?php
+            
+                foreach ($dt_service as $d):?>
+						<div class="col-lg-4">
+							<div class="single-destinations">
+								<div class="thumb">
+									<img src="<?= base_url(); ?>upload/<?= $d->file; ?>" alt="">
+								</div>
+								<div class="details">
+									<h4><?= $d->nama_service; ?></h4>
+									
+									<ul class="package-list">
+										<li class="d-flex justify-content-between align-items-center">
+											<span>Biaya</span>
+											<span><?= $d->biaya; ?></span>
+										</li>
+										<li class="d-flex justify-content-between align-items-center">
+											<span>Durasi</span>
+											<span><?= $d->durasi; ?></span>
+										</li>
+									
+										<li class="d-flex justify-content-between align-items-center">
+											<span></span>
+											<a href="<?= base_url('user'); ?>" class="price-btn">Booking</a>
+										</li>													
+									</ul>
+								</div>
+							</div>
+						</div>		
+						<?php endforeach;?>																												
 					</div>
 				</div>	
 			</section>

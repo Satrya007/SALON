@@ -36,7 +36,29 @@
 		                </div>
 		            </div>						
 					<div class="row">
-							   
+							   <?php
+            
+                foreach ($dt_kategori as $kt):?>
+						<div class="col-lg-3">
+							<div class="single-price">
+								<h4><?= $kt->nama_kategori; ?>
+									<?php $id=$kt->id_kategori; ?>
+								</h4>
+								<ul class="price-list">
+
+									<?php
+									 $query=$this->db->query("Select * from service where id_kategori = '$id'");
+                                                        foreach ($query->result() as $row) :?>
+                                                        
+									<li class="d-flex justify-content-between align-items-center">
+										<span><?= $row->nama_service; ?></span>
+										<a href="#" class="price-btn">Rp. <?= $row->biaya; ?></a>
+									</li>
+									<?php endforeach; ?>													
+								</ul>
+							</div>
+						</div>
+					<?php endforeach; ?>
 						
 																	
 					</div>

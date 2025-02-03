@@ -71,7 +71,7 @@
             <?=
               $this->session->userdata('nama'); ?>
           </h6>
-          <h1 class="text-white">J'LUXE</h1>
+          <h1 class="text-white">J'LUXe</h1>
           <p class="text-white">
             Kami berikan pelayanan terbaik untuk anda
           </p>
