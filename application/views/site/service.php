@@ -20,8 +20,7 @@
 		                <div class="menu-content pb-40 col-lg-8">
 		                    <div class="title text-center">
 		                        <h1 class="mb-10">Layanan Kami</h1>
-		                        <p>Kami berikan layanan  terbaik untuk anda</p>
-		                    </div>
+		                        <p>Kami berikan layanan  terbaik untuk anda</p>		
 		                </div>
 		            </div>						
 					<div class="row">

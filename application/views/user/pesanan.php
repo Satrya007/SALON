@@ -137,24 +137,12 @@
                         <strong>BCA:</strong> 1234-5678-9012
                     </li>
                     <li>
-                        <i class="fas fa-university"></i> <!-- BRI Icon -->
-                        <strong>BRI:</strong> 9876-5432-1098
+                        <i class="fas fa-credit-card"></i> <!-- SeaBank Icon -->
+                        <strong>Sea Bank:</strong> @your_ovo_account
                     </li>
                     <li>
-                        <i class="fas fa-university"></i> <!-- Mandiri Icon -->
-                        <strong>Mandiri:</strong> 6543-2109-8765
-                    </li>
-                    <li>
-                        <i class="fas fa-university"></i> <!-- BNI Icon -->
-                        <strong>BNI:</strong> 8765-4321-0987
-                    </li>
-                    <li>
-                        <i class="fas fa-credit-card"></i> <!-- OVO Icon -->
-                        <strong>OVO:</strong> @your_ovo_account
-                    </li>
-                    <li>
-                        <i class="fas fa-credit-card"></i> <!-- OVO Icon -->
-                        <strong>Dana:</strong> @your_ovo_account
+                        <i class="fas fa-credit-card"></i> <!-- Gopay Icon -->
+                        <strong>Gopay:</strong> @your_ovo_account
                     </li>
                     <li>
                         <i class="fas fa-credit-card"></i> <!-- OVO Icon -->
