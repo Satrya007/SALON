@@ -178,15 +178,6 @@
       $('#dataTable2').DataTable()
     })
   </script>
-  <script type="text/javascript">
-    <?php if ($this->session->flashdata('success')) { ?>
-      toastr.success("<?php echo $this->session->flashdata('success'); ?>");
-    <?php } else if ($this->session->flashdata('delete')) { ?>
-        toastr.error("<?php echo $this->session->flashdata('delete'); ?>");
-    <?php } else if ($this->session->flashdata('update')) { ?>
-          toastr.info("<?php echo $this->session->flashdata('update'); ?>");
-    <?php } ?>
-  </script>
 </body>
 
 </html>

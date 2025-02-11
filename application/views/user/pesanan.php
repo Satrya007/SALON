@@ -138,15 +138,15 @@
                     </li>
                     <li>
                         <i class="fas fa-credit-card"></i> <!-- SeaBank Icon -->
-                        <strong>Sea Bank:</strong> @your_ovo_account
+                        <strong>Sea Bank:</strong> 9014 5655 5131
                     </li>
                     <li>
                         <i class="fas fa-credit-card"></i> <!-- Gopay Icon -->
-                        <strong>Gopay:</strong> @your_ovo_account
+                        <strong>Gopay:</strong> 089529899239
                     </li>
                     <li>
                         <i class="fas fa-credit-card"></i> <!-- OVO Icon -->
-                        <strong>ShopeePay:</strong> @your_ovo_account
+                        <strong>ShopeePay:</strong> 089529899239
                     </li>
                     <i class="fas fa-money-bill-wave"></i> <!-- Cash Icon -->
                     <strong>Cash:</strong> Bayar Tunai Di Konter Untuk Mendapat Struk

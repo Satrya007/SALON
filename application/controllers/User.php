@@ -9,9 +9,8 @@ class User extends CI_Controller
         $this->load->database();
         $role = $this->session->userdata('role');
         if ($role <> 1) {
-            $notif = "Anda belum login";
-            $this->session->set_flashdata('delete', $notif);
-            redirect(site_url('site'));
+            echo "<script>alert('Anda belum login');window.location.href='" . site_url('site') . "';</script>";
+            exit;
         }
     }
 
@@ -60,38 +59,35 @@ class User extends CI_Controller
         $this->template->load('user/template', 'user/gallery', $data);
     }
     public function pesanan()
-{
-    // Ambil data pesanan lengkap beserta servisnya
-    $pesanan_data = $this->m_umum->get_pesanan_saya();
+    {
+        // Ambil data pesanan lengkap beserta servisnya
+        $pesanan_data = $this->m_umum->get_pesanan_saya();
 
-    // Debug: Periksa apakah data pesanan ada
-    if (empty($pesanan_data)) {
-        $this->session->set_flashdata('error', 'Tidak ada pesanan untuk ditampilkan.');
-    } else {
-        // Pastikan setiap item dalam pesanan memiliki properti yang diperlukan
-        foreach ($pesanan_data as &$pesanan) {
-            if (!isset($pesanan->biaya)) {
-                $pesanan->biaya = 0; // atau nilai default yang sesuai
+        // Debug: Periksa apakah data pesanan ada
+        if (empty($pesanan_data)) {
+            echo "<script>alert('Tidak ada pesanan untuk ditampilkan.');window.location.href='" . base_url('user') . "';</script>";
+        } else {
+            // Pastikan setiap item dalam pesanan memiliki properti yang diperlukan
+            foreach ($pesanan_data as &$pesanan) {
+                if (!isset($pesanan->biaya)) {
+                    $pesanan->biaya = 0; // atau nilai default yang sesuai
+                }
             }
         }
+
+        $data = array(
+            'judul' => 'Pesanan Saya',
+            'dt_pesanan' => $pesanan_data,
+        );
+
+        $this->template->load('user/template', 'user/pesanan', $data);
     }
 
-    $data = array(
-        'judul' => 'Pesanan Saya',
-        'dt_pesanan' => $pesanan_data,
-    );
-
-    $this->template->load('user/template', 'user/pesanan', $data);
-}
-
-    
     function delete_transaksi($id)
     {
 
         $this->m_umum->hapus('transaksi', 'id_transaksi', $id);
-        $notif = " Data Berhasil dihapuskan";
-        $this->session->set_flashdata('delete', $notif);
-        redirect('user/pesanan');
+        echo "<script>alert('Data Berhasil dihapuskan');window.location.href='" . base_url('user/pesanan') . "';</script>";
     }
     public function uploadFile()
     {
@@ -109,7 +105,7 @@ class User extends CI_Controller
             return $this->upload->data("file_name");
         }
         $error = $this->upload->display_errors();
-        echo $error;
+        echo "<script>alert('" . $error . "');window.location.href='" . base_url('user/pesanan') . "';</script>";
         exit;
     }
     function bayar()
@@ -123,9 +119,7 @@ class User extends CI_Controller
         );
         $where = array('id_transaksi' => $id_transaksi);
         $res = $this->m_umum->UpdateData('transaksi', $data_update, $where);
-        $notif = "Bukti Pembayaran berhasil di upload";
-        $this->session->set_flashdata('success', $notif);
-        redirect('user/pesanan');
+        echo "<script>alert('Bukti Pembayaran berhasil di upload');window.location.href='" . base_url('user/pesanan') . "';</script>";
     }
     function kirim_testimoni()
     {
@@ -133,13 +127,11 @@ class User extends CI_Controller
         $this->db->set('id_testimoni', 'UUID()', FALSE);
         $this->form_validation->set_rules('nama_testimoni', 'nama_testimoni', 'required');
         if ($this->form_validation->run() === FALSE)
-            redirect('user');
+            echo "<script>alert('Harap isi nama dan testimoni.');window.location.href='" . base_url('user') . "';</script>";
         else {
 
             $this->m_umum->set_data("testimoni");
-            $notif = "Data Berhasil dikirim";
-            $this->session->set_flashdata('success', $notif);
-            redirect('user');
+            echo "<script>alert('Data Berhasil dikirim');window.location.href='" . base_url('user') . "';</script>";
         }
     }
 
@@ -171,15 +163,13 @@ class User extends CI_Controller
         $this->form_validation->set_rules('id_service', 'ID Service', 'required');
     
         if ($this->form_validation->run() === FALSE) {
-            $this->session->set_flashdata('error', 'Harap isi semua data booking.');
-            redirect('user/service');
+            echo "<script>alert('Harap isi semua data booking.');window.location.href='" . base_url('user/service') . "';</script>";
         }
 
         // Periksa ketersediaan slot
         $slot_tersedia = $this->m_umum->check_slot($tgl_booking, $jam_booking, $id_service);
         if (!$slot_tersedia) {
-            $this->session->set_flashdata('error', 'Slot sudah penuh. Silakan pilih jam lain.');
-            redirect('user/service');
+            echo "<script>alert('Slot sudah penuh. Silakan pilih jam lain.');window.location.href='" . base_url('user/service') . "';</script>";
         }
 
         // Proses penyimpanan booking
@@ -202,14 +192,11 @@ class User extends CI_Controller
         $this->db->trans_complete();
 
         if ($this->db->trans_status() === FALSE) {
-            $this->session->set_flashdata('error', 'Gagal menyimpan booking. Silakan coba lagi.');
-            redirect('user/service');
+            echo "<script>alert('Gagal menyimpan booking. Silakan coba lagi.');window.location.href='" . base_url('user/service') . "';</script>";
         }
 
         // Berikan notifikasi keberhasilan
-        $notif = "Booking berhasil! Silakan tunggu konfirmasi dari admin.";
-        $this->session->set_flashdata('success', $notif);
-        redirect('user/pesanan');
+        echo "<script>alert('Booking berhasil! Silakan tunggu konfirmasi dari admin.');window.location.href='" . base_url('user/pesanan') . "';</script>";
     }
     public function check_slot()
     {
@@ -258,3 +245,4 @@ class User extends CI_Controller
         }
     }
 }
+

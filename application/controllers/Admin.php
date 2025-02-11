@@ -92,10 +92,8 @@ function transaksi()
    $no_transaksi = 'BS'.$tgl.$jam.$kode_unik.$thn.$menitdetik.$bln;
      $detail = $this->m_umum->get_booking($tgl_booking);
         if ($detail->num_rows() >= 20) {
-            $notif = "Penuh di hari tersebut";
-            $this->session->set_flashdata('delete', $notif);
-            redirect('admin/transaksi');
-        }
+            echo "<script>alert('Penuh di hari tersebut');window.location.href='" . base_url('admin/transaksi') . "';</script>";
+          }
         else
         {
         $this->db->set('id_transaksi', 'UUID()', FALSE);
@@ -108,9 +106,7 @@ function transaksi()
         else {
 
             $this->m_umum->set_data("transaksi");
-            $notif = "Tambah Data Berhasil";
-            $this->session->set_flashdata('success', $notif);
-            redirect('admin/transaksi');
+            echo "<script>alert('Tambah Data Berhasil');window.location.href='" . base_url('admin/transaksi') . "';</script>";
         }
     }
     }
@@ -125,10 +121,7 @@ function transaksi()
         );
         $where = array('id_transaksi' => $id_transaksi);
         $res = $this->m_umum->UpdateData('transaksi', $data_update, $where);
-            $notif = "Bukti Pembayaran berhasil di upload";
-            $this->session->set_flashdata('success', $notif);
-            redirect('admin/transaksi');
-
+        echo "<script>alert('Bukti Pembayaran berhasil di upload);window.location.href='" . base_url('admin/transaksi') . "';</script>";
     }
 function update_transaksi()
     {
@@ -139,19 +132,15 @@ function update_transaksi()
             redirect('admin/transaksi');
         else {
             $this->m_umum->update_data("transaksi");
-            $notif = " Update Data Berhasil";
-            $this->session->set_flashdata('update', $notif);
-            redirect('admin/transaksi');
+            echo "<script>alert('Update Data Berhasil');window.location.href='" . base_url('admin/transaksi') . "';</script>";
         }
     }
      function delete_transaksi($id)
     {
 
         $this->m_umum->hapus('transaksi', 'id_transaksi', $id);
-        $notif = " Data Berhasil dihapuskan";
-        $this->session->set_flashdata('delete', $notif);
-        redirect('admin/transaksi');
-    }
+        echo "<script>alert('Data Berhasil dihapuskan');window.location.href='" . base_url('admin/transaksi') . "';</script>";
+        }
     function pesan()
     {
 
@@ -166,10 +155,8 @@ function update_transaksi()
     {
 
         $this->m_umum->hapus('kontak', 'id_kontak', $id);
-        $notif = " Data Berhasil dihapuskan";
-        $this->session->set_flashdata('delete', $notif);
-        redirect('admin/pesan');
-    }
+        echo "<script>alert('Data Berhasil dihapuskan');window.location.href='" . base_url('admin/pesan') . "';</script>";
+       }
     function kategori()
     {
 
@@ -189,9 +176,8 @@ function update_transaksi()
         else {
 
             $this->m_umum->set_data("kategori");
-            $notif = "Tambah Data Berhasil";
-            $this->session->set_flashdata('success', $notif);
-            redirect('admin/kategori');
+            echo "<script>alert('Tambah Data Berhasil');window.location.href='" . base_url('admin/kategori') . "';</script>";
+           
         }
     }
     function update_kategori()
@@ -202,18 +188,16 @@ function update_transaksi()
             redirect('admin/kategori');
         else {
             $this->m_umum->update_data("kategori");
-            $notif = " Update Data Berhasil";
-            $this->session->set_flashdata('update', $notif);
-            redirect('admin/kategori');
+            echo "<script>alert('Update Data Berhasil');window.location.href='" . base_url('admin/kategori') . "';</script>";
+        
         }
     }
     function delete_kategori($id)
     {
 
         $this->m_umum->hapus('kategori', 'id_kategori', $id);
-        $notif = " Data Berhasil dihapuskan";
-        $this->session->set_flashdata('delete', $notif);
-        redirect('admin/kategori');
+        echo "<script>alert('Data Berhasil dihapuskan');window.location.href='" . base_url('admin/kategori') . "';</script>";
+        
     }
 
      function testimoni()
@@ -235,9 +219,8 @@ function update_transaksi()
         else {
 
             $this->m_umum->set_data("testimoni");
-            $notif = "Tambah Data Berhasil";
-            $this->session->set_flashdata('success', $notif);
-            redirect('admin/testimoni');
+            echo "<script>alert('Tambah Data Berhasil');window.location.href='" . base_url('admin/testimoni') . "';</script>";
+           
         }
     }
     function update_testimoni()
@@ -248,19 +231,16 @@ function update_transaksi()
             redirect('admin/testimoni');
         else {
             $this->m_umum->update_data("testimoni");
-            $notif = " Update Data Berhasil";
-            $this->session->set_flashdata('update', $notif);
-            redirect('admin/testimoni');
+            echo "<script>alert('Update Data Berhasil');window.location.href='" . base_url('admin/testimoni') . "';</script>";
+        
         }
     }
     function delete_testimoni($id)
     {
 
         $this->m_umum->hapus('testimoni', 'id_testimoni', $id);
-        $notif = " Data Berhasil dihapuskan";
-        $this->session->set_flashdata('delete', $notif);
-        redirect('admin/testimoni');
-    }
+        echo "<script>alert('Data Berhasil dihapuskan');window.location.href='" . base_url('admin/testimoni') . "';</script>";
+       }
  function service()
     {
 
@@ -290,9 +270,7 @@ function update_transaksi()
         );
 
         $this->m_umum->input_data($data, 'service');
-            $notif = "Tambah Data Berhasil";
-            $this->session->set_flashdata('success', $notif);
-            redirect('admin/service');
+        echo "<script>alert('Tambah Data Berhasil');window.location.href='" . base_url('admin/service') . "';</script>";
 
     }
 
@@ -320,18 +298,15 @@ function update_transaksi()
         );
         $where = array('id_service' => $id_service);
         $res = $this->m_umum->UpdateData('service', $data_update, $where);
-            $notif = "Update Data Berhasil";
-            $this->session->set_flashdata('success', $notif);
-            redirect('admin/service');
+        echo "<script>alert('Update Data Berhasil');window.location.href='" . base_url('admin/service') . "';</script>";
 
     }
     function delete_service($id)
     {
 
         $this->m_umum->hapus('service', 'id_service', $id);
-        $notif = " Data Berhasil dihapuskan";
-        $this->session->set_flashdata('delete', $notif);
-        redirect('admin/service');
+        echo "<script>alert('Data Berhasil dihapuskan');window.location.href='" . base_url('admin/service') . "';</script>";
+       
     }
 
 function gallery()
@@ -359,9 +334,8 @@ function gallery()
         );
 
         $this->m_umum->input_data($data, 'gallery');
-            $notif = "Tambah Data Berhasil";
-            $this->session->set_flashdata('success', $notif);
-            redirect('admin/gallery');
+        echo "<script>alert('Tambah Data Berhasil');window.location.href='" . base_url('admin/gallery') . "';</script>";
+          
 
     }
 
@@ -386,18 +360,16 @@ function gallery()
         );
         $where = array('id_gallery' => $id_gallery);
         $res = $this->m_umum->UpdateData('gallery', $data_update, $where);
-            $notif = "Update Data Berhasil";
-            $this->session->set_flashdata('success', $notif);
-            redirect('admin/gallery');
+        echo "<script>alert('Update Data Berhasil');window.location.href='" . base_url('admin/gallery') . "';</script>";
+        
 
     }
     function delete_gallery($id)
     {
 
         $this->m_umum->hapus('gallery', 'id_gallery', $id);
-        $notif = " Data Berhasil dihapuskan";
-        $this->session->set_flashdata('delete', $notif);
-        redirect('admin/gallery');
+        echo "<script>alert('Data Berhasil dihapuskan');window.location.href='" . base_url('admin/gallery') . "';</script>";
+        
     }
 
     function karyawan()
@@ -419,9 +391,8 @@ function gallery()
         else {
 
             $this->m_umum->set_data("karyawan");
-            $notif = "Tambah Data Berhasil";
-            $this->session->set_flashdata('success', $notif);
-            redirect('admin/karyawan');
+            echo "<script>alert('Tambah Data Berhasil');window.location.href='" . base_url('admin/karyawan') . "';</script>";
+          
         }
     }
     function update_karyawan()
@@ -432,18 +403,16 @@ function gallery()
             redirect('admin/karyawan');
         else {
             $this->m_umum->update_data("karyawan");
-            $notif = " Update Data Berhasil";
-            $this->session->set_flashdata('update', $notif);
-            redirect('admin/karyawan');
+            echo "<script>alert('Update Data Berhasil');window.location.href='" . base_url('admin/karyawan') . "';</script>";
+           
         }
     }
     function delete_karyawan($id)
     {
 
         $this->m_umum->hapus('karyawan', 'id_karyawan', $id);
-        $notif = " Data Berhasil dihapuskan";
-        $this->session->set_flashdata('delete', $notif);
-        redirect('admin/karyawan');
+        echo "<script>alert('Data Berhasil dihapuskan');window.location.href='" . base_url('admin/karyawan') . "';</script>";
+       
     }
     
 
@@ -466,9 +435,8 @@ function gallery()
         else {
 
             $this->m_umum->set_data("pelanggan");
-            $notif = "Tambah Data Berhasil";
-            $this->session->set_flashdata('success', $notif);
-            redirect('admin/pelanggan');
+            echo "<script>alert('Tambah Data Berhasil');window.location.href='" . base_url('admin/pelanggan') . "';</script>";
+            
         }
     }
     function update_pelanggan()
@@ -479,18 +447,14 @@ function gallery()
             redirect('admin/pelanggan');
         else {
             $this->m_umum->update_data("pelanggan");
-            $notif = " Update Data Berhasil";
-            $this->session->set_flashdata('update', $notif);
-            redirect('admin/pelanggan');
+            echo "<script>alert('Update Data Berhasil');window.location.href='" . base_url('admin/pelanggan') . "';</script>";
         }
     }
     function delete_pelanggan($id)
     {
 
         $this->m_umum->hapus('pelanggan', 'id_pelanggan', $id);
-        $notif = " Data Berhasil dihapuskan";
-        $this->session->set_flashdata('delete', $notif);
-        redirect('admin/pelanggan');
+        echo "<script>alert('Data Berhasil dihapuskan');window.location.href='" . base_url('admin/pelanggan') . "';</script>";
     }
      function laporan_pelanggan()
     {
