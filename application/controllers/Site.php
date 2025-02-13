@@ -37,47 +37,41 @@ class Site extends CI_Controller{
             redirect('site');
         }
     }
-       function register()
-    {
-  $username = $this->input->post('username');
-   $detail = $this->m_umum->get_pelanggan($username);
-         
+    public function register() {
+        $this->form_validation->set_rules('nama_pelanggan', 'Nama Pelanggan', 'required');
+        $this->form_validation->set_rules('jk', 'Jenis Kelamin', 'required');
+        $this->form_validation->set_rules('tempat_lahir', 'Tempat Lahir', 'required');
+        $this->form_validation->set_rules('tgl_lahir', 'Tanggal Lahir', 'required');
+        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+        $this->form_validation->set_rules('no_telp', 'No Telp', 'required');
+        $this->form_validation->set_rules('username', 'Username', 'required|is_unique[pelanggan.username]');
+        $this->form_validation->set_rules('password', 'Password', 'required');
 
-        $this->db->set('id_pelanggan', 'UUID()', FALSE);
-        $nama_pelanggan = $this->input->post('nama_pelanggan');
-        $jk = $this->input->post('jk');
-        $tempat_lahir = $this->input->post('tempat_lahir');
-        $tgl_lahir = $this->input->post('tgl_lahir');
-        $alamat = $this->input->post('alamat');
-        $no_telp = $this->input->post('no_telp');
-      
-        $password = $this->input->post('password');
-              
-      
-        $data = array(
+        if ($this->form_validation->run() == FALSE) {
+            echo "<script>
+                alert('Data register tidak lengkap atau username sudah digunakan!');
+                window.location.href='".base_url('site')."';
+            </script>";
+        } else {
+            $data = array(
+                'id_pelanggan' => $this->m_umum->get_id_pelanggan(),
+                'nama_pelanggan' => $this->input->post('nama_pelanggan'),
+                'jk' => $this->input->post('jk'),
+                'tempat_lahir' => $this->input->post('tempat_lahir'),
+                'tgl_lahir' => $this->input->post('tgl_lahir'),
+                'alamat' => $this->input->post('alamat'),
+                'no_telp' => $this->input->post('no_telp'),
+                'username' => $this->input->post('username'),
+                'password' => md5($this->input->post('password')),
+                'role' => 1
+            );
             
-            'nama_pelanggan' => $nama_pelanggan,
-            'jk' => $jk,
-            'tempat_lahir' => $tempat_lahir,
-            'tgl_lahir' => $tgl_lahir,
-            'alamat' => $alamat,
-            'no_telp' => $no_telp,
-            'username' => $username,
-            'role' => 1,
-            'password' => md5($username),
-        );
- if ($detail->num_rows() > 0) {
-            $notif = "Username sudah ada";
-            $this->session->set_flashdata('delete', $notif);
-            redirect('site');
+            $this->m_umum->input_data($data, 'pelanggan');
+            echo "<script>
+                alert('Register berhasil! Silahkan login.');
+                window.location.href='".base_url('site')."';
+            </script>";
         }
-        else {
-        $this->m_umum->input_data($data, 'pelanggan');
-            $notif = "Register Berhasil Silahkan Login";
-            $this->session->set_flashdata('success', $notif);
-            redirect('site');
-          }
-
     }
      public function about()
     {
@@ -112,4 +106,3 @@ class Site extends CI_Controller{
 
 }
 
- 

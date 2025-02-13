@@ -46,7 +46,11 @@ class M_umum extends CI_model
 	}
 	function input_data($data, $table)
 	{
-		$this->db->insert($table, $data);
+		// Jika table adalah pelanggan dan id_pelanggan belum ada
+		if($table == 'pelanggan' && !isset($data['id_pelanggan'])) {
+			$data['id_pelanggan'] = $this->get_id_pelanggan();
+		}
+		return $this->db->insert($table, $data);
 	}
 	function UpdateData($tabelName, $data, $where)
 	{
@@ -221,5 +225,23 @@ function get_transaksi()
 		return $query->num_rows() < 3; // Asumsi maksimal 3 slot per jam untuk setiap layanan
 	}
 
+	public function get_id_pelanggan() {
+		$this->db->select('RIGHT(id_pelanggan,3) as kode', FALSE);
+		$this->db->order_by('id_pelanggan', 'DESC');
+		$this->db->limit(1);
+		$query = $this->db->get('pelanggan');
+	
+		if($query->num_rows() <> 0) {
+			$data = $query->row();
+			$kode = intval($data->kode) + 1;
+		} else {
+			$kode = 1;
+		}
+	
+		$kodemax = str_pad($kode, 3, "0", STR_PAD_LEFT);
+		$kodejadi = "PLG".$kodemax; // PLG001, PLG002, dst
+		
+		return $kodejadi;
+	}
 
 }

@@ -75,43 +75,74 @@
       </div>
     </div>
   </section>
-  <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalFormTitle"
-    aria-hidden="true">
+  <!-- Login Modal -->
+  <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalFormTitle">Login</h5>
+          <h5 class="modal-title">Login</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <?php
-        echo validation_errors();
-        echo form_open('login/auth_action'); ?>
-
-        <!-- Modal body -->
+        <?php 
+        if($this->session->flashdata('message')): 
+            echo "<script>alert('".$this->session->flashdata('message')."');</script>";
+        endif; 
+        ?>
+        <?php echo form_open('login/auth_action'); ?>
         <div class="modal-body">
           <div class="mb-3">
-            <label for="exampleInputEmail1">Username</label>
+            <label>Username</label>
             <input type="text" class="form-control" name="username" required>
-
           </div>
           <div class="mb-3">
-            <label for="exampleInputEmail1">Password</label>
+            <label>Password</label>
             <input type="password" class="form-control" name="password" required>
-
           </div>
-          <div class="modal-footer">
-
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            <input type="submit" name="submit" class="btn btn-info btn-pill" value="Login">
-
+          <div class="d-flex justify-content-between align-items-center">
+            <a href="#" class="text-decoration-none" data-toggle="modal" data-target="#forgotPasswordModal" data-dismiss="modal">
+              Lupa Password?
+            </a>
           </div>
         </div>
-
-
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-info btn-pill">Login</button>
+        </div>
         </form>
-        
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="forgotPasswordModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Lupa Password</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <?php echo form_open('login/forgot_password'); ?>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label>Username</label>
+            <input type="text" class="form-control" name="username" required>
+          </div>
+          <div class="mb-3">
+            <label>Password Baru</label>
+            <input type="password" class="form-control" name="new_password" required>
+            <small class="text-muted">
+              Masukkan password baru untuk akun Anda
+            </small>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-info btn-pill">Update Password</button>
+        </div>
+        </form>
       </div>
     </div>
   </div>
@@ -242,7 +273,32 @@
   <script src="<?= base_url(); ?>assets/js/owl.carousel.min.js"></script>
   <script src="<?= base_url(); ?>assets/js/mail-script.js"></script>
   <script src="<?= base_url(); ?>assets/js/main.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+  <script>
+  $(document).ready(function(){
+      <?php if($this->session->flashdata('message')){ ?>
+          // Auto hide alert setelah 3 detik
+          window.setTimeout(function() {
+              $(".alert").fadeTo(500, 0).slideUp(500, function(){
+                  $(this).remove(); 
+              });
+          }, 3000);
+      <?php } ?>
+  });
+  </script>
+  <script>
+  $(document).ready(function(){
+      <?php if($this->session->flashdata('message')){ ?>
+          $('#login').modal('show');
+      <?php } ?>
+  });
+  </script>
+  <script>
+  $(document).ready(function(){
+      <?php if($this->session->flashdata('message')){ ?>
+          $('#login').modal('show');
+      <?php } ?>
+  });
+  </script>
 </body>
 
 </html>

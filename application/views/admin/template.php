@@ -28,6 +28,74 @@
     <link rel="stylesheet" href="<?= base_url(); ?>/asset/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <script src="<?= base_url('') ?>asset/vendor/apexcharts/apexcharts.min.js"></script>
 
+    <!-- Tambahkan CSS untuk dashboard -->
+    <style>
+        .dashboard-card {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            min-height: 120px;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .konfirmasi-card {
+            background: linear-gradient(135deg, #7F53AC 0%, #647DEE 100%);
+            color: white;
+        }
+
+        .pembayaran-card {
+            background: linear-gradient(135deg, #45B649 0%, #DCE35B 100%);
+            color: white;
+        }
+
+        .kedatangan-card {
+            background: linear-gradient(135deg, #FFB75E 0%, #ED8F03 100%);
+            color: white;
+        }
+
+        .dikerjakan-card {
+            background: linear-gradient(135deg, #4568DC 0%, #B06AB3 100%);
+            color: white;
+        }
+
+        .selesai-card {
+            background: linear-gradient(135deg, #43CEA2 0%, #185A9D 100%);
+            color: white;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card-value {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .dashboard-icon {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            font-size: 40px;
+            opacity: 0.4;
+        }
+    </style>
+
 </head>
 
 <body id="page-top">
@@ -290,15 +358,6 @@
         $(function () {
             $('#dataTable2').DataTable()
         })
-    </script>
-    <script type="text/javascript">
-        <?php if ($this->session->flashdata('success')) { ?>
-            toastr.success("<?php echo $this->session->flashdata('success'); ?>");
-        <?php } else if ($this->session->flashdata('delete')) { ?>
-                toastr.error("<?php echo $this->session->flashdata('delete'); ?>");
-        <?php } else if ($this->session->flashdata('update')) { ?>
-                    toastr.info("<?php echo $this->session->flashdata('update'); ?>");
-        <?php } ?>
     </script>
 </body>
 

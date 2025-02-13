@@ -1,0 +1,94 @@
+.php
+
+<!-- Login Modal -->
+<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Login</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <?php echo form_open('login/auth_action'); ?>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label>Username</label>
+                    <input type="text" class="form-control" name="username" required>
+                </div>
+                <div class="mb-3">
+                    <label>Password</label>
+                    <input type="password" class="form-control" name="password" required>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="#" class="text-decoration-none" data-toggle="modal" data-target="#forgotPasswordModal" data-dismiss="modal">
+                        Lupa Password?
+                    </a>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Forgot Password Modal -->
+<div class="modal fade" id="forgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="forgotPasswordLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Lupa Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <?php echo form_open('login/forgot_password'); ?>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label>Username</label>
+                    <input type="text" class="form-control" name="username" required>
+                    <small class="text-muted">
+                        Masukkan username Anda untuk mendapatkan password baru.
+                    </small>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Reset Password</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Script untuk handling modal dan notifikasi -->
+<script>
+$(document).ready(function(){
+    // Handle modal transitions
+    $('#forgotPasswordModal').on('show.bs.modal', function (e) {
+        $('#login').modal('hide');
+    });
+    
+    $('#forgotPasswordModal').on('hidden.bs.modal', function (e) {
+        $('#login').modal('show');
+    });
+
+    // Handle notifications
+    <?php if($this->session->flashdata('success')){ ?>
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "timeOut": "5000"
+        };
+        toastr.success("<?php echo $this->session->flashdata('success'); ?>");
+    <?php } else if($this->session->flashdata('error')){ ?>
+        toastr.error("<?php echo $this->session->flashdata('error'); ?>");
+    <?php } else if($this->session->flashdata('delete')){ ?>
+        toastr.error("<?php echo $this->session->flashdata('delete'); ?>");
+    <?php } ?>
+});
+</script>
