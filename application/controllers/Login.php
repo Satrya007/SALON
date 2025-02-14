@@ -10,20 +10,22 @@ class Login extends CI_Controller
         parent::__construct();
         $this->load->model('m_login');
     }
-    public function index()
-    {
+    public function index() {
+        // Simpan URL sebelumnya untuk redirect setelah login
+        $this->session->set_userdata('redirect_after_login', isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : base_url());
+        
         $role = $this->session->userdata('role');
         if ($role == 1) {
             redirect(site_url('user'));
         } else if ($role == 2) {
             redirect(site_url('admin'));
-        } else {
-            redirect('site');
         }
+        
+        $data['judul'] = 'Login';
+        $this->template->load('site/template2', 'site/login', $data);
     }
 
-    public function auth_action()
-    {
+    public function auth_action() {
         $username = htmlspecialchars($this->input->post('username', TRUE), ENT_QUOTES);
         $password = htmlspecialchars($this->input->post('password', TRUE), ENT_QUOTES);
 
@@ -31,20 +33,9 @@ class Login extends CI_Controller
         $cek_user = $this->m_login->auth_pelanggan($username, $password);
 
         if (!$cek_login->num_rows() && !$cek_user->num_rows()) {
-            $this->session->set_flashdata('message', 'Username atau Password Salah!');
-            redirect('site');
-        }
-
-        // Cek login admin
-        if ($cek_login->num_rows() > 0) {
-            $data = $cek_login->row();
-            if ($data->role == 2) {
-                $this->session->set_userdata('role', $data->role);
-                redirect('admin');
-            } else {
-                $this->session->set_flashdata('error', 'Gagal login sebagai admin');
-                redirect('site');
-            }
+            $this->session->set_flashdata('message', '<div class="alert alert-danger">Username atau Password Salah!</div>');
+            redirect('login');
+            return;
         }
 
         // Cek login pelanggan
@@ -56,13 +47,32 @@ class Login extends CI_Controller
                     'id_pelanggan' => $data_user->id_pelanggan,
                     'nama' => $data_user->nama_pelanggan
                 ]);
+                
+                // Redirect ke halaman sebelumnya jika ada
+                if($this->session->userdata('redirect_after_login')) {
+                    $redirect = $this->session->userdata('redirect_after_login');
+                    $this->session->unset_userdata('redirect_after_login');
+                    redirect($redirect);
+                    return;
+                }
+                
                 redirect('user');
+                return;
             }
         }
 
-        // Jika tidak ada yang cocok
-        $this->session->set_flashdata('error', 'Username atau Password Salah');
-        redirect('site');
+        // Cek login admin
+        if ($cek_login->num_rows() > 0) {
+            $data = $cek_login->row();
+            if ($data->role == 2) {
+                $this->session->set_userdata('role', $data->role);
+                redirect('admin');
+                return;
+            }
+        }
+
+        $this->session->set_flashdata('error', '<div class="alert alert-danger">Username atau Password Salah</div>');
+        redirect('login');
     }
 
     public function forgot_password() {

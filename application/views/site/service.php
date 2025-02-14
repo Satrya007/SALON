@@ -39,9 +39,16 @@
                                 <span>Durasi: <?= $d->durasi; ?></span>
                             </div>
                         </div>
+<?php if($this->session->userdata('id_pelanggan')): ?>
                         <button class="btn-pesan" data-toggle="modal" data-target="#pesanModal<?= $d->id_service; ?>">
                             Pesan Sekarang
                         </button>
+                        <?php else: ?>
+    <!-- Jika user belum login, tampilkan peringatan sederhana -->
+    <button onclick="showLoginAlert()" class="btn-pesan">
+        Pesan Sekarang
+    </button>
+<?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -60,12 +67,12 @@
                             
                             <div class="form-group">
                                 <label><i class="far fa-calendar-alt"></i> Tanggal Perawatan</label>
-                                <input type="date" class="form-control" name="tgl_pesanan" required min="<?= date('Y-m-d'); ?>">
+                                <input type="date" class="form-control" name="tgl_pesanan" min="<?= date('Y-m-d'); ?>">
                             </div>
                             
                             <div class="form-group">
                                 <label><i class="far fa-clock"></i> Waktu Perawatan</label>
-                                <select class="form-control" name="jam_pesanan" required>
+                                <select class="form-control" name="jam_pesanan" >
                                     <option value="">Pilih Waktu</option>
                                     <option value="09:00">09:00 WIB</option>
                                     <option value="10:00">10:00 WIB</option>
@@ -211,3 +218,17 @@
     box-shadow: 0 0 0 0.2rem rgba(255,71,87,0.25);
 }
 </style>
+
+<script>
+function showLoginAlert() {
+    Swal.fire({
+        title: 'Perhatian!',
+        text: 'Anda harus login terlebih dahulu untuk melakukan pemesanan.',
+        icon: 'warning',
+        confirmButtonColor: '#ff4757',
+        confirmButtonText: 'OK'
+    });
+}
+
+</script>
+

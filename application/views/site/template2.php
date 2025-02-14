@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="<?= base_url(); ?>assets/css/animate.min.css">
   <link rel="stylesheet" href="<?= base_url(); ?>assets/css/owl.carousel.css">
   <link rel="stylesheet" href="<?= base_url(); ?>assets/css/main.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 
 <body>
@@ -62,7 +63,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalFormTitle">Login</h5>
+          <h5 class="modal-title" id="exampleModalFormTitle">Login</h5> 
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -141,6 +142,7 @@
   <script src="<?= base_url(); ?>assets/js/owl.carousel.min.js"></script>
   <script src="<?= base_url(); ?>assets/js/mail-script.js"></script>
   <script src="<?= base_url(); ?>assets/js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

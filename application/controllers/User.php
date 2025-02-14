@@ -137,6 +137,9 @@ class User extends CI_Controller
 
     public function booking()
     {
+        if (!$this->session->userdata('id_pelanggan')) {
+            $this->session->set_flashdata('error', 'Anda harus login terlebih dahulu untuk melakukan pemesanan.');  
+        }
         $tgl_booking = $this->input->post('tgl_booking');
         $jam_booking = $this->input->post('jam');
         $id_service = $this->input->post('id_service'); // Pastikan ID service ada

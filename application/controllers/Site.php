@@ -104,5 +104,26 @@ class Site extends CI_Controller{
         $this->template->load('site/template2', 'site/gallery', $data);
     }
 
+    public function booking() {
+        if(!$this->session->userdata('id_pelanggan')) {
+            redirect('login');
+        }
+
+        $data = array(
+            'id_transaksi' => 'UUID()', 
+            'id_pelanggan' => $this->input->post('id_pelanggan'),
+            'id_service' => $this->input->post('id_service'),
+            'tgl_booking' => $this->input->post('tgl_booking'),
+            'jam' => $this->input->post('jam'),
+            'status' => 0,
+            'no_transaksi' => 'BS'.date('dmYHis'),
+            'tgl_transaksi' => date('Y-m-d')
+        );
+        
+        $this->m_umum->input_data($data, 'transaksi');
+        $this->session->set_flashdata('success', 'Booking berhasil! Silahkan cek status booking Anda.');
+        redirect('site/riwayat');
+    }
+
 }
 
