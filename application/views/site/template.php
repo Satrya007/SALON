@@ -39,7 +39,7 @@
 
     <div class="container main-menu">
       <div class="row align-items-center justify-content-between d-flex">
-        <a href="index.html" style="color: white; font-size: 32px; font-weight: 900;"><strong>J'LUXE</strong>
+        <a href="<?= base_url(); ?>" style="color: white; font-size: 32px; font-weight: 900;"><strong>J'LUXE</strong>
           <!--<img src="assets/img/logo.png" alt="logo" style="width: 50px; height: 50px;"-->
         </a>
         <nav id="nav-menu-container">
@@ -48,10 +48,8 @@
             <li><a href="<?= base_url('site/about'); ?>">Tentang Kami</a></li>
             <li><a href="<?= base_url('site/gallery'); ?>">Gallery</a></li>
             <li><a href="<?= base_url('site/service'); ?>">Layanan Kami</a></li>
-
-
-            <li><a data-toggle="modal" data-target="#register" href="#">Register</a></li>
-            <li><a data-toggle="modal" data-target="#login" href="#">Login</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#register">Register</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#login">Login</a></li>
           </ul>
         </nav><!-- #nav-menu-container -->
       </div>
@@ -98,7 +96,17 @@
           </div>
           <div class="mb-3">
             <label>Password</label>
-            <input type="password" class="form-control" name="password" required>
+              <div class="input-group mb-3">
+              <input type="password" class="form-control" name="password" id="password" required>
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <a href="javascript:void(0);" class="text-dark" id="showPassword">
+                    <i class="fa fa-eye" id="visible"></i>
+                    <i class="fa fa-eye-slash" id="invisible"></i>
+                  </a>
+                </span>
+              </div>
+              </div>
           </div>
           <div class="d-flex justify-content-between align-items-center">
             <a href="#" class="text-decoration-none" data-toggle="modal" data-target="#forgotPasswordModal" data-dismiss="modal">
@@ -132,7 +140,17 @@
           </div>
           <div class="mb-3">
             <label>Password Baru</label>
-            <input type="password" class="form-control" name="new_password" required>
+            <div class="input-group mb-3">
+              <input type="password" class="form-control" name="password" id="password2" required>
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <a href="javascript:void(0);" class="text-dark" id="showPassword2">
+                    <i class="fa fa-eye" id="visible2"></i>
+                    <i class="fa fa-eye-slash" id="invisible2"></i>
+                  </a>
+                </span>
+              </div>
+              </div>
             <small class="text-muted">
               Masukkan password baru untuk akun Anda
             </small>
@@ -211,7 +229,17 @@
           </div>
           <div class="mb-3">
             <label for="exampleInputEmail1">Password</label>
-            <input type="password" class="form-control" name="password" required>
+            <div class="input-group mb-3">
+              <input type="password" class="form-control" name="password" id="password3" required>
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <a href="javascript:void(0);" class="text-dark" id="showPassword3">
+                    <i class="fa fa-eye" id="visible3"></i>
+                    <i class="fa fa-eye-slash" id="invisible3"></i>
+                  </a>
+                </span>
+              </div>
+              </div>
 
           </div>
           <div class="modal-footer">
@@ -272,6 +300,7 @@
   <script src="<?= base_url(); ?>assets/js/jquery.nice-select.min.js"></script>
   <script src="<?= base_url(); ?>assets/js/owl.carousel.min.js"></script>
   <script src="<?= base_url(); ?>assets/js/mail-script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="<?= base_url(); ?>assets/js/main.js"></script>
   <script>
   $(document).ready(function(){
@@ -287,6 +316,54 @@
   </script>
   <script>
   $(document).ready(function(){
+     $('#visible').hide();
+     $('#visible2').hide();
+     $('#visible3').hide();
+      $('#showPassword').click(function(){
+          var password = $('#password');
+          var passwordType = password.attr('type');
+          var visible = $('#visible');
+          var invisible = $('#invisible');
+          if(passwordType == 'password'){
+              password.attr('type', 'text');
+              visible.show();
+              invisible.hide();
+          } else {
+              password.attr('type', 'password');
+              visible.hide();
+              invisible.show();
+  }});
+      $('#showPassword2').click(function(){
+          var password = $('#password2');
+          var passwordType = password.attr('type');
+          var visible = $('#visible2');
+          var invisible = $('#invisible2');
+          if(passwordType == 'password'){
+              password.attr('type', 'text');
+              visible.show();
+              invisible.hide();
+          } else {
+              password.attr('type', 'password');
+              visible.hide();
+              invisible.show();
+  }});
+      $('#showPassword3').click(function(){
+          var password = $('#password3');
+          var passwordType = password.attr('type');
+          var visible = $('#visible3');
+          var invisible = $('#invisible3');
+          if(passwordType == 'password'){
+              password.attr('type', 'text');
+              visible.show();
+              invisible.hide();
+          } else {
+              password.attr('type', 'password');
+              visible.hide();
+              invisible.show();
+  }});
+  });
+  $(document).ready(function(){
+  
       <?php if($this->session->flashdata('message')){ ?>
           $('#login').modal('show');
       <?php } ?>

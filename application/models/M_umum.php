@@ -183,13 +183,17 @@ class M_umum extends CI_model
 
 function get_transaksi()
 {
-    $this->db->select('*');
-    $this->db->from('transaksi a');
-    $this->db->join('service b', 'a.id_service = b.id_service', 'left');
-    $this->db->join('pelanggan c', 'a.id_pelanggan = c.id_pelanggan', 'left');
-    $this->db->order_by('a.tgl_transaksi desc');
-
-    $query = $this->db->get();
+    // $this->db->select('*');
+    // $this->db->from('transaksi a');
+    // $this->db->join('service b', 'a.id_service = b.id_service', 'left');
+    // $this->db->join('pelanggan c', 'a.id_pelanggan = c.id_pelanggan', 'left');
+    // $this->db->order_by('a.tgl_transaksi desc');
+	$this->db->select('a.*, b.*, c.nama_pelanggan, c.no_telp');
+	$this->db->from('transaksi a');
+	$this->db->join('service b', 'a.id_service = b.id_service', 'left');
+	$this->db->join('pelanggan c', 'a.id_pelanggan = c.id_pelanggan', 'left');
+	$this->db->order_by('a.tgl_transaksi', 'desc');
+	$query = $this->db->get();
 
     // Debug: Periksa apakah ada data yang dikembalikan
     if ($query->num_rows() > 0) {

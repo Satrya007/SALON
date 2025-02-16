@@ -39,7 +39,7 @@
 
     <div class="container main-menu">
       <div class="row align-items-center justify-content-between d-flex">
-        <a href="index.html" style="color: white; font-size: 32px; font-weight: 900;">
+        <a href="<?= base_url(); ?>" style="color: white; font-size: 32px; font-weight: 900;">
           <strong>J'LUXE</strong>
           <!--<img src="assets/img/logo.png" alt="Ikon"
             style="width: 50px; height: 50px; max-width: 50px; max-height: 50px;"-->

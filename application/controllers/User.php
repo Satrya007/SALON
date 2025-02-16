@@ -12,6 +12,8 @@ class User extends CI_Controller
             echo "<script>alert('Anda belum login');window.location.href='" . site_url('site') . "';</script>";
             exit;
         }
+
+        
     }
 
     public function index()

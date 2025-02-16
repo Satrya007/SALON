@@ -19,6 +19,7 @@
               <tr>
                 <th>No</th>
                 <th>No Pesanan</th>
+                <th>Nama Pelanggan</th>
                 <th>Tanggal Transaksi</th>
                 <th>Tanggal Booking</th>
                 <th>Jam</th>
@@ -41,11 +42,12 @@
                 <tr>
                   <td><?= $no++; ?></td>
                   <td><?= $d->no_transaksi; ?></td>
+                  <td><?= $d->nama_pelanggan; ?></td>
                   <td><?= $d->tgl_transaksi; ?></td>
                   <td><?= $d->tgl_booking; ?></td>
                   <td><?= $d->jam.':00'; ?></td>
                   <td><?= $d->nama_service; ?></td>
-                  <td><?= $d->biaya; ?></td>
+                  <td>Rp <?= number_format($d->biaya ?? 0, 0, ',', '.'); ?></td>
                   <td><?= $d->durasi; ?></td>
                   <td><?php if($d->bukti!=NULL):?><a href="<?= base_url();?>upload/<?= $d->bukti;?>"><i class="fa fa-file"></i></a><?php endif; ?> <?php if($d->status==1):?><a  data-tooltip="tooltip"
   data-bs-placement="top"

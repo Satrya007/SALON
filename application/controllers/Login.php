@@ -26,6 +26,7 @@ class Login extends CI_Controller
     }
 
     public function auth_action() {
+        $url  = $_SERVER['HTTP_REFERER'];
         $username = htmlspecialchars($this->input->post('username', TRUE), ENT_QUOTES);
         $password = htmlspecialchars($this->input->post('password', TRUE), ENT_QUOTES);
 
@@ -34,7 +35,7 @@ class Login extends CI_Controller
 
         if (!$cek_login->num_rows() && !$cek_user->num_rows()) {
             $this->session->set_flashdata('message', '<div class="alert alert-danger">Username atau Password Salah!</div>');
-            redirect('login');
+            redirect($url);
             return;
         }
 
@@ -72,7 +73,7 @@ class Login extends CI_Controller
         }
 
         $this->session->set_flashdata('error', '<div class="alert alert-danger">Username atau Password Salah</div>');
-        redirect('login');
+        redirect($url);
     }
 
     public function forgot_password() {

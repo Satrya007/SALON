@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Mar 06, 2024 at 11:17 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 7.4.28
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 15 Feb 2025 pada 11.16
+-- Versi server: 10.4.11-MariaDB
+-- Versi PHP: 7.2.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `gallery`
+-- Struktur dari tabel `gallery`
 --
 
 CREATE TABLE `gallery` (
@@ -36,7 +36,7 @@ CREATE TABLE `gallery` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `gallery`
+-- Dumping data untuk tabel `gallery`
 --
 
 INSERT INTO `gallery` (`id_gallery`, `nama_gallery`, `ket`, `file`, `tgl_upload`) VALUES
@@ -48,7 +48,7 @@ INSERT INTO `gallery` (`id_gallery`, `nama_gallery`, `ket`, `file`, `tgl_upload`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `karyawan`
+-- Struktur dari tabel `karyawan`
 --
 
 CREATE TABLE `karyawan` (
@@ -62,7 +62,7 @@ CREATE TABLE `karyawan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `karyawan`
+-- Dumping data untuk tabel `karyawan`
 --
 
 INSERT INTO `karyawan` (`id_karyawan`, `nama_karyawan`, `jk`, `tempat_lahir`, `tgl_lahir`, `alamat`, `no_telp`) VALUES
@@ -74,7 +74,7 @@ INSERT INTO `karyawan` (`id_karyawan`, `nama_karyawan`, `jk`, `tempat_lahir`, `t
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kategori`
+-- Struktur dari tabel `kategori`
 --
 
 CREATE TABLE `kategori` (
@@ -83,7 +83,7 @@ CREATE TABLE `kategori` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `kategori`
+-- Dumping data untuk tabel `kategori`
 --
 
 INSERT INTO `kategori` (`id_kategori`, `nama_kategori`) VALUES
@@ -99,7 +99,7 @@ INSERT INTO `kategori` (`id_kategori`, `nama_kategori`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kontak`
+-- Struktur dari tabel `kontak`
 --
 
 CREATE TABLE `kontak` (
@@ -111,7 +111,7 @@ CREATE TABLE `kontak` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `kontak`
+-- Dumping data untuk tabel `kontak`
 --
 
 INSERT INTO `kontak` (`id_kontak`, `nama`, `no_hp`, `subject`, `pesan`) VALUES
@@ -121,7 +121,7 @@ INSERT INTO `kontak` (`id_kontak`, `nama`, `no_hp`, `subject`, `pesan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pelanggan`
+-- Struktur dari tabel `pelanggan`
 --
 
 CREATE TABLE `pelanggan` (
@@ -138,7 +138,7 @@ CREATE TABLE `pelanggan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `pelanggan`
+-- Dumping data untuk tabel `pelanggan`
 --
 
 INSERT INTO `pelanggan` (`id_pelanggan`, `nama_pelanggan`, `jk`, `tempat_lahir`, `tgl_lahir`, `alamat`, `no_telp`, `username`, `password`, `role`) VALUES
@@ -151,7 +151,7 @@ INSERT INTO `pelanggan` (`id_pelanggan`, `nama_pelanggan`, `jk`, `tempat_lahir`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pengguna`
+-- Struktur dari tabel `pengguna`
 --
 
 CREATE TABLE `pengguna` (
@@ -162,7 +162,7 @@ CREATE TABLE `pengguna` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `pengguna`
+-- Dumping data untuk tabel `pengguna`
 --
 
 INSERT INTO `pengguna` (`id_pengguna`, `username`, `password`, `role`) VALUES
@@ -171,7 +171,7 @@ INSERT INTO `pengguna` (`id_pengguna`, `username`, `password`, `role`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `service`
+-- Struktur dari tabel `service`
 --
 
 CREATE TABLE `service` (
@@ -184,7 +184,7 @@ CREATE TABLE `service` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `service`
+-- Dumping data untuk tabel `service`
 --
 
 INSERT INTO `service` (`id_service`, `nama_service`, `id_kategori`, `biaya`, `durasi`, `file`) VALUES
@@ -225,7 +225,7 @@ INSERT INTO `service` (`id_service`, `nama_service`, `id_kategori`, `biaya`, `du
 -- --------------------------------------------------------
 
 --
--- Table structure for table `testimoni`
+-- Struktur dari tabel `testimoni`
 --
 
 CREATE TABLE `testimoni` (
@@ -236,7 +236,7 @@ CREATE TABLE `testimoni` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `testimoni`
+-- Dumping data untuk tabel `testimoni`
 --
 
 INSERT INTO `testimoni` (`id_testimoni`, `nama_testimoni`, `ket`, `tgl_testimoni`) VALUES
@@ -248,15 +248,16 @@ INSERT INTO `testimoni` (`id_testimoni`, `nama_testimoni`, `ket`, `tgl_testimoni
 -- --------------------------------------------------------
 
 --
--- Table structure for table `transaksi`
+-- Struktur dari tabel `transaksi`
 --
 
 CREATE TABLE `transaksi` (
   `id_transaksi` varchar(100) NOT NULL,
+  `id_service` varchar(100) NOT NULL,
   `id_pelanggan` varchar(100) NOT NULL,
   `no_transaksi` varchar(100) NOT NULL,
   `tgl_transaksi` date NOT NULL,
-  `id_service` varchar(100) NOT NULL,
+  `harga` varchar(250) NOT NULL,
   `bukti` varchar(100) DEFAULT NULL,
   `status` int(11) NOT NULL,
   `tgl_booking` date NOT NULL,
@@ -264,77 +265,78 @@ CREATE TABLE `transaksi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `transaksi`
+-- Dumping data untuk tabel `transaksi`
 --
 
-INSERT INTO `transaksi` (`id_transaksi`, `id_pelanggan`, `no_transaksi`, `tgl_transaksi`, `id_service`, `bukti`, `status`, `tgl_booking`, `jam`) VALUES
-('1274b1a4-dba2-11ee-ac1f-0c4de9c03c1d', '10d7c418-8c26-11ee-bfa4-704d7b67aaac', 'BS06114AO3I2024124303', '2024-03-06', '01e6459d-91eb-11ee-a7c1-704d7b67aaac', NULL, 0, '2024-03-07', 17),
-('1ccbd0b9-8c26-11ee-bfa4-704d7b67aaac', '10d7c418-8c26-11ee-bfa4-704d7b67aaac', 'BS2607PN1Z82023362111', '2023-11-26', '2a7cd51f-8c25-11ee-bfa4-704d7b67aaac', NULL, 1, '2023-11-28', 0),
-('27a1e5ad-9908-11ee-8f1d-704d7b67aaac', 'b23cc578-98e6-11ee-8f1d-704d7b67aaac', 'BS1205RN5CU2023043912', '2023-12-12', '5b5f7cc8-8c26-11ee-bfa4-704d7b67aaac', '47b2715c81446453ce2c6679b4a1179a.jpg', 2, '2023-12-31', 0),
-('28d58140-6fc8-11ee-8d63-93f0fa14750d', 'e01bd050-6f9f-11ee-8d63-93f0fa14750d', 'BS2106RZ6SM2023130510', '2023-10-21', '60eaae1d-6f4c-11ee-8d63-93f0fa14750d', '25bc13f971bb32c6563ecf9ae59fb5ec.pdf', 1, '2023-10-21', 0),
-('29a80511-6fb2-11ee-8d63-93f0fa14750d', 'e01bd050-6f9f-11ee-8d63-93f0fa14750d', 'BS2103GUNA82023354110', '2023-10-21', '46a261d9-6f57-11ee-8d63-93f0fa14750d', 'd6498df15caeace09d1a3148b874201d.pdf', 4, '2023-10-21', 0),
-('388ce021-6fd7-11ee-8d63-93f0fa14750d', 'e01bd050-6f9f-11ee-8d63-93f0fa14750d', 'BS2108M2N7E2023005310', '2023-10-21', '4225aafb-6fc8-11ee-8d63-93f0fa14750d', '549c8462fa5cff2338f78a1aaf7c56aa.pdf', 1, '2023-10-20', 0),
-('507e07bb-6fc8-11ee-8d63-93f0fa14750d', 'e01bd050-6f9f-11ee-8d63-93f0fa14750d', 'BS2106DJQCX2023141110', '2023-10-21', '4225aafb-6fc8-11ee-8d63-93f0fa14750d', '6d011733fe3776996c018dfd3160a731.pdf', 1, '2023-10-20', 0),
-('85742409-9efd-11ee-a091-e8f40802874d', 'b23cc578-98e6-11ee-8f1d-704d7b67aaac', 'BS2007QYMPI2023033912', '2023-12-20', '2497f041-91ed-11ee-a7c1-704d7b67aaac', NULL, 0, '2023-12-21', 0),
-('93402a34-dba2-11ee-ac1f-0c4de9c03c1d', '525893da-dba2-11ee-ac1f-0c4de9c03c1d', 'BS0611E4H1W2024161903', '2024-03-06', '01e6459d-91eb-11ee-a7c1-704d7b67aaac', NULL, 0, '2024-03-07', 17),
-('a1db837b-98e7-11ee-8f1d-704d7b67aaac', 'b23cc578-98e6-11ee-8f1d-704d7b67aaac', 'BS1201U6A4J2023115112', '2023-12-12', '01e6459d-91eb-11ee-a7c1-704d7b67aaac', '4fe78f1188c37c3ba3d234aaf7e4fe13.jpg', 2, '2023-12-16', 0),
-('fd7fcaaa-9a81-11ee-8a70-704d7b67aaac', 'b23cc578-98e6-11ee-8f1d-704d7b67aaac', 'BS1402KANUV2023091812', '2023-12-14', '17979044-91ee-11ee-a7c1-704d7b67aaac', NULL, 0, '2023-12-30', 0);
+INSERT INTO `transaksi` (`id_transaksi`, `id_service`, `id_pelanggan`, `no_transaksi`, `tgl_transaksi`, `harga`, `bukti`, `status`, `tgl_booking`, `jam`) VALUES
+('1274b1a4-dba2-11ee-ac1f-0c4de9c03c1d', '01e6459d-91eb-11ee-a7c1-704d7b67aaac', '10d7c418-8c26-11ee-bfa4-704d7b67aaac', 'BS06114AO3I2024124303', '2024-03-06', '', NULL, 0, '2024-03-07', 17),
+('1ccbd0b9-8c26-11ee-bfa4-704d7b67aaac', '2a7cd51f-8c25-11ee-bfa4-704d7b67aaac', '10d7c418-8c26-11ee-bfa4-704d7b67aaac', 'BS2607PN1Z82023362111', '2023-11-26', '', NULL, 1, '2023-11-28', 0),
+('27a1e5ad-9908-11ee-8f1d-704d7b67aaac', '5b5f7cc8-8c26-11ee-bfa4-704d7b67aaac', 'b23cc578-98e6-11ee-8f1d-704d7b67aaac', 'BS1205RN5CU2023043912', '2023-12-12', '', '47b2715c81446453ce2c6679b4a1179a.jpg', 2, '2023-12-31', 0),
+('28d58140-6fc8-11ee-8d63-93f0fa14750d', '60eaae1d-6f4c-11ee-8d63-93f0fa14750d', 'e01bd050-6f9f-11ee-8d63-93f0fa14750d', 'BS2106RZ6SM2023130510', '2023-10-21', '', '25bc13f971bb32c6563ecf9ae59fb5ec.pdf', 1, '2023-10-21', 0),
+('29a80511-6fb2-11ee-8d63-93f0fa14750d', '46a261d9-6f57-11ee-8d63-93f0fa14750d', 'e01bd050-6f9f-11ee-8d63-93f0fa14750d', 'BS2103GUNA82023354110', '2023-10-21', '', 'd6498df15caeace09d1a3148b874201d.pdf', 4, '2023-10-21', 0),
+('388ce021-6fd7-11ee-8d63-93f0fa14750d', '4225aafb-6fc8-11ee-8d63-93f0fa14750d', 'e01bd050-6f9f-11ee-8d63-93f0fa14750d', 'BS2108M2N7E2023005310', '2023-10-21', '', '549c8462fa5cff2338f78a1aaf7c56aa.pdf', 1, '2023-10-20', 0),
+('507e07bb-6fc8-11ee-8d63-93f0fa14750d', '4225aafb-6fc8-11ee-8d63-93f0fa14750d', 'e01bd050-6f9f-11ee-8d63-93f0fa14750d', 'BS2106DJQCX2023141110', '2023-10-21', '', '6d011733fe3776996c018dfd3160a731.pdf', 1, '2023-10-20', 0),
+('67b069462c214', '09d76ddf-91ee-11ee-a7c1-704d7b67aaac', 'e01bd050-6f9f-11ee-8d63-93f0fa14750d', 'BS1513O6M1D2025153402', '2025-02-15', '255000', NULL, 0, '2025-02-16', 13),
+('85742409-9efd-11ee-a091-e8f40802874d', '2497f041-91ed-11ee-a7c1-704d7b67aaac', 'b23cc578-98e6-11ee-8f1d-704d7b67aaac', 'BS2007QYMPI2023033912', '2023-12-20', '', NULL, 0, '2023-12-21', 0),
+('93402a34-dba2-11ee-ac1f-0c4de9c03c1d', '01e6459d-91eb-11ee-a7c1-704d7b67aaac', '525893da-dba2-11ee-ac1f-0c4de9c03c1d', 'BS0611E4H1W2024161903', '2024-03-06', '', NULL, 0, '2024-03-07', 17),
+('a1db837b-98e7-11ee-8f1d-704d7b67aaac', '01e6459d-91eb-11ee-a7c1-704d7b67aaac', 'b23cc578-98e6-11ee-8f1d-704d7b67aaac', 'BS1201U6A4J2023115112', '2023-12-12', '', '4fe78f1188c37c3ba3d234aaf7e4fe13.jpg', 2, '2023-12-16', 0),
+('fd7fcaaa-9a81-11ee-8a70-704d7b67aaac', '17979044-91ee-11ee-a7c1-704d7b67aaac', 'b23cc578-98e6-11ee-8f1d-704d7b67aaac', 'BS1402KANUV2023091812', '2023-12-14', '', NULL, 0, '2023-12-30', 0);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `gallery`
+-- Indeks untuk tabel `gallery`
 --
 ALTER TABLE `gallery`
   ADD PRIMARY KEY (`id_gallery`);
 
 --
--- Indexes for table `karyawan`
+-- Indeks untuk tabel `karyawan`
 --
 ALTER TABLE `karyawan`
   ADD PRIMARY KEY (`id_karyawan`);
 
 --
--- Indexes for table `kategori`
+-- Indeks untuk tabel `kategori`
 --
 ALTER TABLE `kategori`
   ADD PRIMARY KEY (`id_kategori`);
 
 --
--- Indexes for table `kontak`
+-- Indeks untuk tabel `kontak`
 --
 ALTER TABLE `kontak`
   ADD PRIMARY KEY (`id_kontak`);
 
 --
--- Indexes for table `pelanggan`
+-- Indeks untuk tabel `pelanggan`
 --
 ALTER TABLE `pelanggan`
   ADD PRIMARY KEY (`id_pelanggan`),
   ADD UNIQUE KEY `username` (`username`);
 
 --
--- Indexes for table `pengguna`
+-- Indeks untuk tabel `pengguna`
 --
 ALTER TABLE `pengguna`
   ADD PRIMARY KEY (`id_pengguna`);
 
 --
--- Indexes for table `service`
+-- Indeks untuk tabel `service`
 --
 ALTER TABLE `service`
   ADD PRIMARY KEY (`id_service`);
 
 --
--- Indexes for table `testimoni`
+-- Indeks untuk tabel `testimoni`
 --
 ALTER TABLE `testimoni`
   ADD PRIMARY KEY (`id_testimoni`);
 
 --
--- Indexes for table `transaksi`
+-- Indeks untuk tabel `transaksi`
 --
 ALTER TABLE `transaksi`
   ADD PRIMARY KEY (`id_transaksi`);

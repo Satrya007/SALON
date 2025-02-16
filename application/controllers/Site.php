@@ -6,6 +6,9 @@ class Site extends CI_Controller{
         parent::__construct();
       
         $this->load->model('m_umum');
+        if(!empty($this->session->userdata('id_pelanggan')) && $this->session->userdata('role') == 1 ) {
+            redirect(base_url('user'));
+        }
     }
 
  
@@ -81,7 +84,7 @@ class Site extends CI_Controller{
           
            
         );
-        $this->template->load('site/template2', 'site/about', $data);
+        $this->template->load('site/template', 'site/about', $data);
     }
      public function service()
     {
@@ -91,7 +94,7 @@ class Site extends CI_Controller{
           
            
         );
-        $this->template->load('site/template2', 'site/service', $data);
+        $this->template->load('site/template', 'site/service', $data);
     }
      public function gallery()
     {
@@ -101,7 +104,7 @@ class Site extends CI_Controller{
           
            
         );
-        $this->template->load('site/template2', 'site/gallery', $data);
+        $this->template->load('site/template', 'site/gallery', $data);
     }
 
     public function booking() {
