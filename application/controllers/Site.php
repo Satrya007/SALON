@@ -79,32 +79,35 @@ class Site extends CI_Controller{
      public function about()
     {
   $data = array(
+            'modal'  => $this->load->view('user/modal', '', TRUE),
            'judul' => 'Tentang Kami',
          
           
            
         );
-        $this->template->load('site/template', 'site/about', $data);
+        $this->template->load('user/template', 'site/about', $data);
     }
      public function service()
     {
   $data = array(
+            'modal'  => $this->load->view('user/modal', '', TRUE),
            'judul' => 'Layanan Kami',
          'dt_service' => $this->m_umum->get_service(),
           
            
         );
-        $this->template->load('site/template', 'site/service', $data);
+        $this->template->load('user/template', 'site/service', $data);
     }
      public function gallery()
     {
   $data = array(
+            'modal'  => $this->load->view('user/modal', '', TRUE),
            'judul' => 'Gallery Kami',
           'dt_gallery' => $this->m_umum->get_gallery_all(),
           
            
         );
-        $this->template->load('site/template', 'site/gallery', $data);
+        $this->template->load('user/template', 'site/gallery', $data);
     }
 
     public function booking() {
@@ -115,6 +118,7 @@ class Site extends CI_Controller{
         $data = array(
             'id_transaksi' => 'UUID()', 
             'id_pelanggan' => $this->input->post('id_pelanggan'),
+            'modal'  => $this->load->view('user/modal', '', TRUE),
             'id_service' => $this->input->post('id_service'),
             'tgl_booking' => $this->input->post('tgl_booking'),
             'jam' => $this->input->post('jam'),

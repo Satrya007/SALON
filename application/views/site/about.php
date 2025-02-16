@@ -2,6 +2,20 @@
 $judul = "TENTANG KAMI";
 ?>
 
+<section class="about-banner relative">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    <?= $judul; ?>
+                </h1>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End banner Area -->
+
 <!-- Start about-info Area -->
 <section class="about-info-area section-gap">
     <div class="container">

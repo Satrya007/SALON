@@ -53,13 +53,22 @@
 
         <nav id="nav-menu-container">
           <ul class="nav-menu">
-            <li><a href="<?= base_url('user'); ?>">Home</a></li>
-            <li><a href="<?= base_url('user/about'); ?>">About Us</a></li>
-            <li><a href="<?= base_url('user/gallery'); ?>">Gallery</a></li>
-            <li><a href="<?= base_url('user/service'); ?>">Layanan Kami</a></li>
-            <li><a href="<?= base_url('user/pesanan'); ?>">Pesanan Saya</a></li>
-            <li><a href="<?= base_url('login/logout'); ?>">Logout</a></li>
+         
+            <?php
+            $session = $this->session->userdata('id_pelanggan');
+            ?>
 
+            <li><a href="<?= base_url(!empty($session) ? 'user' : 'site'); ?>">Home</a></li>
+            <li><a href="<?= base_url(!empty($session) ? 'user/about' : 'site/about'); ?>">Tentang Kami</a></li>
+            <li><a href="<?= base_url(!empty($session) ? 'user/gallery' : 'site/gallery'); ?>">Gallery</a></li>
+            <li><a href="<?= base_url(!empty($session) ? 'user/service' : 'site/service'); ?>">Layanan Kami</a></li>
+            <?php if(empty($session)): ?>
+                <li><a href="#" data-toggle="modal" data-target="#register">Register</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#login">Login</a></li>
+            <?php else: ?>
+                <li><a href="<?= base_url('user/pesanan'); ?>">Pesanan Saya</a></li>
+                <li><a href="<?= base_url('login/logout'); ?>">Logout</a></li>
+            <?php endif; ?>
 
           </ul>
         </nav><!-- #nav-menu-container -->
@@ -68,45 +77,7 @@
   </header>
 
 
-  <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalFormTitle"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalFormTitle">Login</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <?php
-        echo validation_errors();
-        echo form_open('login/auth_action'); ?>
-
-        <!-- Modal body -->
-        <div class="modal-body">
-          <div class="mb-3">
-            <label for="exampleInputEmail1">Username</label>
-            <input type="text" class="form-control" name="username" required>
-
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputEmail1">Password</label>
-            <input type="password" class="form-control" name="password" required>
-
-          </div>
-          <div class="modal-footer">
-
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            <input type="submit" name="submit" class="btn btn-info btn-pill" value="Login">
-
-          </div>
-        </div>
-
-
-        </form>
-      </div>
-    </div>
-  </div>
+  <?= !empty($modal) ? $modal : ''; ?>
 
 
 
@@ -158,6 +129,7 @@
   <script src="<?= base_url(); ?>/asset/js/demo/datatables-demo.js"></script>
   <script src="<?= base_url(); ?>assets/js/popper.min.js"></script>
   <script src="<?= base_url(); ?>assets/js/vendor/bootstrap.min.js"></script>
+  
   <script
     src="<?= base_url(); ?>assets/https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
   <script src="<?= base_url(); ?>assets/js/jquery-ui.js"></script>
@@ -169,7 +141,82 @@
   <script src="<?= base_url(); ?>assets/js/jquery.nice-select.min.js"></script>
   <script src="<?= base_url(); ?>assets/js/owl.carousel.min.js"></script>
   <script src="<?= base_url(); ?>assets/js/mail-script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="<?= base_url(); ?>assets/js/main.js"></script>
+  <script>
+  $(document).ready(function(){
+      <?php if($this->session->flashdata('message')){ ?>
+          // Auto hide alert setelah 3 detik
+          window.setTimeout(function() {
+              $(".alert").fadeTo(500, 0).slideUp(500, function(){
+                  $(this).remove(); 
+              });
+          }, 3000);
+      <?php } ?>
+  });
+  </script>
+  <script>
+  $(document).ready(function(){
+     $('#visible').hide();
+     $('#visible2').hide();
+     $('#visible3').hide();
+      $('#showPassword').click(function(){
+          var password = $('#password');
+          var passwordType = password.attr('type');
+          var visible = $('#visible');
+          var invisible = $('#invisible');
+          if(passwordType == 'password'){
+              password.attr('type', 'text');
+              visible.show();
+              invisible.hide();
+          } else {
+              password.attr('type', 'password');
+              visible.hide();
+              invisible.show();
+  }});
+      $('#showPassword2').click(function(){
+          var password = $('#password2');
+          var passwordType = password.attr('type');
+          var visible = $('#visible2');
+          var invisible = $('#invisible2');
+          if(passwordType == 'password'){
+              password.attr('type', 'text');
+              visible.show();
+              invisible.hide();
+          } else {
+              password.attr('type', 'password');
+              visible.hide();
+              invisible.show();
+  }});
+      $('#showPassword3').click(function(){
+          var password = $('#password3');
+          var passwordType = password.attr('type');
+          var visible = $('#visible3');
+          var invisible = $('#invisible3');
+          if(passwordType == 'password'){
+              password.attr('type', 'text');
+              visible.show();
+              invisible.hide();
+          } else {
+              password.attr('type', 'password');
+              visible.hide();
+              invisible.show();
+  }});
+  });
+  $(document).ready(function(){
+  
+      <?php if($this->session->flashdata('message')){ ?>
+          $('#login').modal('show');
+      <?php } ?>
+  });
+  </script>
+  <script>
+  $(document).ready(function(){
+      <?php if($this->session->flashdata('message')){ ?>
+          $('#login').modal('show');
+      <?php } ?>
+  });
+  </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 

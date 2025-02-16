@@ -9,8 +9,7 @@ class User extends CI_Controller
         $this->load->database();
         $role = $this->session->userdata('role');
         if ($role <> 1) {
-            echo "<script>alert('Anda belum login');window.location.href='" . site_url('site') . "';</script>";
-            exit;
+            redirect(site_url('site'));
         }
 
         
