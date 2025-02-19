@@ -48,8 +48,8 @@ function rupiah($angka){
                 <tr>
                   <td><?= $no++; ?></td>
                   <td><?= $d->no_transaksi; ?></td>
-                  <td><?= $d->tgl_transaksi; ?></td>
-                  <td><?= $d->tgl_booking; ?></td>
+                  <td><?= date('d-m-Y', strtotime($d->tgl_transaksi)); ?></td>
+                  <td><?= date('d-m-Y', strtotime($d->tgl_booking)); ?></td>
                   <td><?= $d->nama_service; ?></td>
                   <td><?= rupiah($biaya=$d->biaya) ?></td>
                   <td><?= $d->durasi; ?></td>

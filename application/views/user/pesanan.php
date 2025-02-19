@@ -38,8 +38,8 @@
                         <tr>
                             <td><?= $no++; ?></td>
                             <td><?= $d->no_transaksi; ?></td>
-                            <td><?= $d->tgl_transaksi; ?></td>
-                            <td><?= $d->tgl_booking; ?></td>
+                            <td><?= date('d-m-Y', strtotime($d->tgl_transaksi)); ?></td>
+                            <td><?= date('d-m-Y', strtotime($d->tgl_booking)); ?></td>
                             <td><?= $d->jam . ':00'; ?></td>
                             <td><?= $d->nama_service; ?></td>
                             <td><?= 'Rp. ' . number_format($d->biaya, 0, ',', '.'); ?></td>
@@ -132,10 +132,7 @@
                 <h2>Metode Pembayaran</h2>
                 <p>Pilih Metode Pembayaran Yang Anda Inginkan :</p>
                 <ul>
-                    <li>
-                        <i class="fas fa-university"></i> <!-- BCA Icon -->
-                        <strong>BCA:</strong> 1234-5678-9012
-                    </li>
+                    
                     <li>
                         <i class="fas fa-credit-card"></i> <!-- SeaBank Icon -->
                         <strong>Sea Bank:</strong> 9014 5655 5131

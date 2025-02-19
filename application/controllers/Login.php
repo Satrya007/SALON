@@ -25,6 +25,9 @@ class Login extends CI_Controller
         $this->template->load('site/template2', 'site/login', $data);
     }
 
+
+    
+
     public function auth_action() {
         $url  = $_SERVER['HTTP_REFERER'];
         $username = htmlspecialchars($this->input->post('username', TRUE), ENT_QUOTES);
@@ -34,7 +37,7 @@ class Login extends CI_Controller
         $cek_user = $this->m_login->auth_pelanggan($username, $password);
 
         if (!$cek_login->num_rows() && !$cek_user->num_rows()) {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger">Username atau Password Salah!</div>');
+            $this->session->set_flashdata('message', 'Username atau Password Salah!');
             redirect($url);
             return;
         }
@@ -91,7 +94,13 @@ class Login extends CI_Controller
         } else {
             $this->session->set_flashdata('message', 'Username tidak ditemukan!');
         }
-        
+
+        // $data = [
+        //     'username' =>  $username,
+        //     'new_password' => $new_password
+        // ];
+        // print_r($data);
+        // print_r($this->session->flashdata('message'));
         redirect('site');
     }
 

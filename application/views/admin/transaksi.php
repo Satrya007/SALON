@@ -43,8 +43,8 @@
                   <td><?= $no++; ?></td>
                   <td><?= $d->no_transaksi; ?></td>
                   <td><?= $d->nama_pelanggan; ?></td>
-                  <td><?= $d->tgl_transaksi; ?></td>
-                  <td><?= $d->tgl_booking; ?></td>
+                  <td><?= date('d-m-Y', strtotime($d->tgl_transaksi)); ?></td>
+                  <td><?= date('d-m-Y', strtotime($d->tgl_booking)); ?></td>
                   <td><?= $d->jam.':00'; ?></td>
                   <td><?= $d->nama_service; ?></td>
                   <td>Rp <?= number_format($d->biaya ?? 0, 0, ',', '.'); ?></td>

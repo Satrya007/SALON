@@ -110,7 +110,7 @@
           </div>
           <div class="d-flex justify-content-between align-items-center">
             <a href="#" class="text-decoration-none" data-toggle="modal" data-target="#forgotPasswordModal" data-dismiss="modal">
-              Lupa Password?
+              Reset Password?
             </a>
           </div>
         </div>
@@ -127,13 +127,14 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Lupa Password</h5>
+          <h5 class="modal-title">Reset Password</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <?php echo form_open('login/forgot_password'); ?>
+       
         <div class="modal-body">
+          <form action="<?= base_url('login/forgot_password'); ?>" method="post">
           <div class="mb-3">
             <label>Username</label>
             <input type="text" class="form-control" name="username" required>
@@ -141,7 +142,7 @@
           <div class="mb-3">
             <label>Password Baru</label>
             <div class="input-group mb-3">
-              <input type="password" class="form-control" name="password" id="password2" required>
+              <input type="password" class="form-control" name="new_password" id="password2" required>
               <div class="input-group-append">
                 <span class="input-group-text">
                   <a href="javascript:void(0);" class="text-dark" id="showPassword2">
@@ -310,6 +311,13 @@
               $(".alert").fadeTo(500, 0).slideUp(500, function(){
                   $(this).remove(); 
               });
+            //   Swal.fire({
+            //     title: 'Berhasil!',
+            //     text: 'Anda harus login terlebih dahulu untuk melakukan pemesanan.',
+            //     icon: 'success',
+            //     confirmButtonColor: '#ff4757',
+            //     confirmButtonText: 'OK'
+            // });
           }, 3000);
       <?php } ?>
   });

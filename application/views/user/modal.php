@@ -35,7 +35,7 @@
           </div>
           <div class="d-flex justify-content-between align-items-center">
             <a href="#" class="text-decoration-none" data-toggle="modal" data-target="#forgotPasswordModal" data-dismiss="modal">
-              Lupa Password?
+              Reset Password?
             </a>
           </div>
         </div>
@@ -52,13 +52,13 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Lupa Password</h5>
+          <h5 class="modal-title">Reset Password</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <?php echo form_open('login/forgot_password'); ?>
         <div class="modal-body">
+          <form action="<?= base_url('login/forgot_password'); ?>" method="post">
           <div class="mb-3">
             <label>Username</label>
             <input type="text" class="form-control" name="username" required>

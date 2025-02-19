@@ -15,6 +15,7 @@ class Site extends CI_Controller{
     public function index()
     {
   $data = array(
+         'modal'  => $this->load->view('user/modal', '', TRUE),
            'judul' => 'Booking Salon Online',
           'dt_gallery' => $this->m_umum->get_gallery(),
           'dt_service' => $this->m_umum->get_service_site(),
